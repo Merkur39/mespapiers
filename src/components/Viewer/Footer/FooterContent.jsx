@@ -2,11 +2,11 @@ import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { isMobileApp } from 'cozy-device-helper'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import { showPanel } from '../helpers'
 import Sharing from './Sharing'
-import ForwardButton from './ForwardButton'
+import ForwardWebButton from './ForwardWebButton'
 import DownloadButton from './DownloadButton'
 import BottomSheetWrapper from './BottomSheetWrapper'
 import BottomSheetContent from './BottomSheetContent'
@@ -25,7 +25,8 @@ const useStyles = makeStyles(theme => ({
 
 const FooterContent = ({ file, toolbarRef }) => {
   const styles = useStyles()
-  const FileActionButton = isMobileApp() ? ForwardButton : DownloadButton
+  const { isMobile } = useBreakpoints()
+  const FileActionButton = isMobile ? ForwardWebButton : DownloadButton
   const actionButtonsRef = useRef()
 
   if (showPanel({ file })) {
@@ -35,7 +36,11 @@ const FooterContent = ({ file, toolbarRef }) => {
         actionButtonsRef={actionButtonsRef}
         toolbarRef={toolbarRef}
       >
-        <BottomSheetContent file={file} ref={actionButtonsRef} />
+        <BottomSheetContent
+          file={file}
+          ref={actionButtonsRef}
+          FileActionButton={FileActionButton}
+        />
       </BottomSheetWrapper>
     )
   }

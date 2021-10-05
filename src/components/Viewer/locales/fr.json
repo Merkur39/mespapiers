@@ -1,7 +1,8 @@
 {
   "viewer": {
     "actions": {
-      "download": "Télécharger"
+      "download": "Télécharger",
+      "forward": "Transférer"
     },
     "error": {
       "generic": "Une erreur s'est produite lors de l'ouverture de ce fichier, veuillez réessayer."
