@@ -65,7 +65,7 @@
     },
     {
       "label": "family_record_book",
-      "featuredPlaceholder": false,
+      "featuredPlaceholder": true,
       "icon": "people",
       "featureDate": "LastUpdate",
       "maxDisplay": 3,
@@ -77,7 +77,7 @@
           "text": "PaperJSON.generic.multiPages.text"
         },
         {
-          "pageIndex": 2,
+          "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericDate.svg",
           "text": "PaperJSON.generic.date.text",

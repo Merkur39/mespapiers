@@ -56,6 +56,7 @@ const Information = ({ currentStep }) => {
         )
     }
   })
+  console.log('Information')
 
   return (
     <>
