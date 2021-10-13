@@ -9,7 +9,7 @@
     "replace": "Remplacer",
     "saveFile": {
       "error": "Une erreur est survenue, veuillez réessayer ultérieurement",
-      "success": "Fichier enregistré avec succès"
+      "success": "Votre carte d’identité a bien été ajoutée à vos papiers"
     }
   },
   "folder": {

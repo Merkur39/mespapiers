@@ -45,7 +45,7 @@ const Contact = () => {
   return (
     <Paper elevation={2} className={'u-mt-1'}>
       <List>
-        <ListItem onClick={!onLoad && submit} disabled={onLoad}>
+        <ListItem onClick={!onLoad ? submit : undefined} disabled={onLoad}>
           <ListItemIcon>
             <Avatar
               size={'small'}

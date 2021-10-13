@@ -17,12 +17,14 @@ import Right from 'cozy-ui/transpiled/react/Icons/Right'
 
 import { getAllQualificationLabel } from 'src/utils/queries'
 import { useScannerI18n } from 'src/components/Hooks/useScannerI18n'
+import { useSnackbarContext } from 'src/components/Snackbar/useSnackbarContext'
 import { useQuery } from 'src/components/Hooks/useQuery'
 
 const PaperGroup = () => {
   const history = useHistory()
   const { t } = useI18n()
   const scannerT = useScannerI18n()
+  const { setSnackbar } = useSnackbarContext()
   const { data: allPapers } = useQuery(getAllQualificationLabel)
 
   // TODO When ".select" will be used in the query, refacto this
@@ -35,8 +37,33 @@ const PaperGroup = () => {
     )
   ]
 
+  const handleClickError = type => {
+    setSnackbar({
+      open: true,
+      duration: 50000,
+      message:
+        'Problème rencontré lors de la création de votre carte d’identité',
+      type
+    })
+  }
+
+  const handleClick = (type, duration) => {
+    setSnackbar({
+      open: true,
+      duration,
+      message: 'Votre carte d’identité a bien été ajoutée à vos papiers',
+      type
+    })
+  }
+
   return (
     <List>
+      <button onClick={() => handleClick('success', 1000)}>
+        Open success snackbar
+      </button>
+      <button onClick={() => handleClickError('error')}>
+        Open error snackbar
+      </button>
       <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
       <div className={'u-pv-half'}>
         {categories.map((category, idx) => (

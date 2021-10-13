@@ -10,6 +10,7 @@ import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import Snackbar from 'src/components/Snackbar/Snackbar'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import { Icon } from 'cozy-ui/transpiled/react'
 import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
@@ -56,6 +57,7 @@ export const App = () => {
           </Content>
           <RealTimeQueries doctype="io.cozy.files" />
           <Alerter />
+          <Snackbar />
         </Main>
         <IconSprite />
       </Layout>
