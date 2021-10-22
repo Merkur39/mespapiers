@@ -7,6 +7,8 @@ import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import { useStepperDialog } from 'src/components/Hooks/useStepperDialog'
 import getOrCreateAppFolderWithReference from 'src/helpers/getFolderWithReference'
 import { createPaper } from 'src/helpers/createPaper'
+import { useScannerI18n } from 'src/components/Hooks/useScannerI18n'
+import { renamePaper } from 'src/helpers/renamePaper'
 
 const { Qualification } = models.document
 
@@ -14,13 +16,14 @@ const FormDataContext = createContext()
 
 const FormDataProvider = ({ children }) => {
   const client = useClient()
-  const { t } = useI18n()
+  const { f, t } = useI18n()
+  const scannerT = useScannerI18n()
   const {
     currentDefinition,
     stepperDialogTitle,
     setIsStepperDialogOpen
   } = useStepperDialog()
-  const { featureDate } = currentDefinition || {}
+  const { featureDate, label } = currentDefinition || {}
   const [formData, setFormData] = useState({
     metadata: {},
     data: []
@@ -43,10 +46,19 @@ const FormDataProvider = ({ children }) => {
           ...metadata,
           featureDate
         }
+        const date =
+          formData.metadata[featureDate] &&
+          f(formData.metadata[featureDate], 'YYYY.MM.DD')
 
+        const fileRenamed = renamePaper(
+          file,
+          scannerT(`items.${label}`),
+          fileMetadata.page,
+          date
+        )
         submitSucceeded = await createPaper(
           client,
-          file,
+          fileRenamed,
           newQualification,
           appFolderID
         )
