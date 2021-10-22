@@ -1,16 +1,14 @@
 import React, { createContext, useState } from 'react'
 
 import { models, useClient } from 'cozy-client'
-import { CozyFile } from 'cozy-doctypes'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
 import { useStepperDialog } from 'src/components/Hooks/useStepperDialog'
 import getOrCreateAppFolderWithReference from 'src/helpers/getFolderWithReference'
-import { FILES_DOCTYPE } from 'src/doctypes'
+import { createPaper } from 'src/helpers/createPaper'
 
 const { Qualification } = models.document
-const HTTP_CODE_CONFLICT = 409
 
 const FormDataContext = createContext()
 
@@ -34,6 +32,10 @@ const FormDataProvider = ({ children }) => {
 
     ;(async () => {
       let submitSucceeded = null
+      const { _id: appFolderID } = await getOrCreateAppFolderWithReference(
+        client,
+        t
+      )
       for (const { file, fileMetadata } of formData.data) {
         const newQualification = {
           ...qualification,
@@ -42,48 +44,13 @@ const FormDataProvider = ({ children }) => {
           featureDate
         }
 
-        const { _id: appFolderID } = await getOrCreateAppFolderWithReference(
+        submitSucceeded = await createPaper(
           client,
-          t
+          file,
+          newQualification,
+          appFolderID
         )
-
-        try {
-          await client.create(FILES_DOCTYPE, {
-            data: file,
-            metadata: { qualification: newQualification },
-            dirId: appFolderID
-          })
-          if (submitSucceeded === null) submitSucceeded = true
-        } catch (err) {
-          const objError = JSON.parse(JSON.stringify(err))
-          if (objError.status === HTTP_CODE_CONFLICT) {
-            const { filename, extension } = CozyFile.splitFilename({
-              name: file.name,
-              type: 'file'
-            })
-            const newFilename = CozyFile.generateNewFileNameOnConflict(filename)
-            const newFilenameWithExt = `${newFilename}${extension}`
-            const blob = file.slice(0, file.size, file.type)
-            const renamedFile = new File([blob], newFilenameWithExt, {
-              type: file.type
-            })
-
-            try {
-              await client.create(FILES_DOCTYPE, {
-                data: renamedFile,
-                metadata: { qualification: newQualification },
-                dirId: appFolderID
-              })
-              if (submitSucceeded === null) submitSucceeded = true
-            } catch (err) {
-              submitSucceeded = false
-              break
-            }
-          } else {
-            submitSucceeded = false
-            break
-          }
-        }
+        if (submitSucceeded === null) break
       }
       setIsStepperDialogOpen(false)
       if (submitSucceeded) {
