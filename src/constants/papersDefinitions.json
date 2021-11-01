@@ -111,6 +111,16 @@
               "name": "AObtentionDate",
               "type": "date",
               "inputLabel": "PaperJSON.driverLicense.AObtentionDate.inputLabel"
+            },
+            {
+              "name": "CObtentionDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.driverLicense.CObtentionDate.inputLabel"
+            },
+            {
+              "name": "DObtentionDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.driverLicense.DObtentionDate.inputLabel"
             }
           ]
         },

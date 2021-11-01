@@ -147,11 +147,11 @@
       "obtentionDate": {
         "text": "Renseignez les dates d'obtention des catégories valables."
       },
-      "CobtentionDate": {
-        "text": "Categ. C (Camion) depuis le"
+      "CObtentionDate": {
+        "inputLabel": "Categ. C (Camion) depuis le"
       },
-      "DobtentionDate": {
-        "text": "Categ. D (Bus) depuis le"
+      "DObtentionDate": {
+        "inputLabel": "Categ. D (Bus) depuis le"
       }
     },
     "card": {
