@@ -22,47 +22,73 @@
     "apps": {
       "description": "Required by the cozy-bar to display the icons of the apps",
       "type": "io.cozy.apps",
-      "verbs": ["GET"]
+      "verbs": [
+        "GET"
+      ]
     },
     "contacts": {
       "description": "Required to access the contacts",
       "type": "io.cozy.contacts.*",
-      "verbs": ["GET"]
+      "verbs": [
+        "GET"
+      ]
     },
     "files": {
       "description": "Required to access the files",
       "type": "io.cozy.files",
-      "verbs": ["ALL"]
+      "verbs": [
+        "ALL"
+      ]
     },
     "sharings": {
       "description": "Required to have access to the sharings in realtime",
       "type": "io.cozy.sharings",
-      "verbs": ["ALL"]
+      "verbs": [
+        "ALL"
+      ]
     },
     "settings": {
       "description": "Required by the cozy-bar to display Claudy and know which applications are coming soon",
       "type": "io.cozy.settings",
-      "verbs": ["GET"]
+      "verbs": [
+        "GET"
+      ]
     },
     "permissions": {
       "description": "Required to run the konnectors",
       "type": "io.cozy.permissions",
-      "verbs": ["ALL"]
+      "verbs": [
+        "ALL"
+      ]
     },
     "konnectors": {
       "description": "Required to display additional information in the viewer for files automatically retrieved by services",
       "type": "io.cozy.konnectors",
-      "verbs": ["GET"]
+      "verbs": [
+        "GET"
+      ]
     },
     "accounts": {
       "description": "Required to display additional information in the viewer for files automatically retrieved by services",
       "type": "io.cozy.accounts",
-      "verbs": ["GET"]
+      "verbs": [
+        "GET"
+      ]
     },
     "triggers": {
       "description": "Required to display additional information in the viewer for files automatically retrieved by services",
       "type": "io.cozy.triggers",
-      "verbs": ["GET"]
+      "verbs": [
+        "GET"
+      ]
     }
-  }
+  },
+  "locales": {
+    "en": {},
+    "fr": {}
+  },
+  "langs": [
+    "en",
+    "fr"
+  ]
 }
