@@ -5,3 +5,5 @@ self.addEventListener('message', event => {
     self.skipWaiting()
   }
 })
+const periodicSync = self.registration.periodicSync
+console.log('periodicSync : ', periodicSync)
