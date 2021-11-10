@@ -54,6 +54,15 @@
         "GET"
       ]
     },
+    "mespapiers.settings": {
+      "description": "Used to manage your papers settings",
+      "type": "io.cozy.mespapiers.settings",
+      "verbs": [
+        "GET",
+        "POST",
+        "PUT"
+      ]
+    },
     "permissions": {
       "description": "Required to run the konnectors",
       "type": "io.cozy.permissions",
