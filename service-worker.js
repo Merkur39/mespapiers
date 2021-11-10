@@ -6,3 +6,6 @@ self.addEventListener('message', event => {
     self.skipWaiting()
   }
 })
+self.addEventListener('activate', event => {
+  console.log('activated', event)
+})
