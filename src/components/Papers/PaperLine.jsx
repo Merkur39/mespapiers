@@ -2,7 +2,7 @@ import React, { useState, useMemo, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import { splitFilename } from 'cozy-client/dist/models/file'
+import { models, useClient } from 'cozy-client'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import ActionMenu, {
@@ -19,17 +19,22 @@ import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
 import IconPdf from 'cozy-ui/transpiled/react/Icons/FileTypePdf'
+import CardMedia from 'cozy-ui/transpiled/react/CardMedia'
 
 import papersJSON from 'src/constants/papersDefinitions.json'
 import { ActionsItems } from 'src/components/Actions/ActionsItems'
+import { getThumbnailLink } from 'src/utils/getThumbnailLink'
 
 const validPageName = page => page === 'front' || page === 'back'
+const { splitFilename } = models.file
 
 const PaperLine = ({ paper, divider, actions }) => {
   const history = useHistory()
   const { f, t } = useI18n()
   const { isMobile } = useBreakpoints()
   const actionBtnRef = useRef()
+  const client = useClient()
+  const [imgOnError, setImgOnError] = useState(false)
 
   const [optionFile, setOptionFile] = useState(false)
   const paperDefinition = useMemo(
@@ -68,7 +73,18 @@ const PaperLine = ({ paper, divider, actions }) => {
         }
       >
         <ListItemIcon>
-          <Icon icon={IconPdf} size={32} />
+          {imgOnError ? (
+            // TODO implement https://github.com/cozy/cozy-drive/blob/master/src/drive/web/modules/filelist/FileIconMime.jsx
+            <Icon icon={IconPdf} size={32} />
+          ) : (
+            <CardMedia
+              component={'img'}
+              width={32}
+              height={32}
+              image={getThumbnailLink(client, paper)}
+              onError={() => setImgOnError(true)}
+            />
+          )}
         </ListItemIcon>
         <ListItemText
           primary={
