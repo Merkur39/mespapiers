@@ -1,5 +1,8 @@
 {
-  "extends": ["cozy-app/react"],
+  "extends": ["cozy-app/react", "plugin:jsdoc/recommended"],
+  "plugins": [
+    "jsdoc"
+],
   "rules": {
     "no-console": 1
   }
