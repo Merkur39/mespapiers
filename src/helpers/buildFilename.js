@@ -1,5 +1,5 @@
 /**
- * @typedef {object} BuildPaperNameParam
+ * @typedef {object} BuildFilenameParam
  * @property {string} qualificationName - Name of the paper qualification
  * @property {string} [pageName] - Name of page (eg Front)
  * @property {string} [fullname] - Fullname of contact
@@ -8,7 +8,8 @@
 
 /**
  * Builded Paper name with qualification name & without use filename original
- * @param {BuildPaperNameParam} opts
+ *
+ * @param {BuildFilenameParam} opts - BuildFilename options
  * @returns {string} Paper name with PDF extension
  */
 export const buildFilename = opts => {

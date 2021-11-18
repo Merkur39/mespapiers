@@ -1,7 +1,10 @@
-import { models } from 'cozy-client'
-import { isReferencedById, isReferencedBy } from 'cozy-client'
+import { isReferencedById, isReferencedBy, models } from 'cozy-client'
+import { IOCozyFile } from 'cozy-client/dist/types'
+
 import { CONTACTS_DOCTYPE } from 'src/doctypes'
-const { getDisplayName } = models.contact
+const {
+  contact: { getDisplayName }
+} = models
 
 const getPaperWithoutContact = papersList => {
   return papersList.filter(paper => !isReferencedBy(paper, CONTACTS_DOCTYPE))
@@ -19,7 +22,7 @@ const DEFAULT_MAX_DISPLAY = 3
  */
 
 /**
- * @param {BuildPaperslistByContactParam} param
+ * @param {BuildPaperslistByContactParam} param - BuildPaperslistByContact options
  * @returns {{ withHeader: boolean, contact: string, papers: {maxDisplay: number, list: IOCozyFile[]} }[]}
  */
 export const buildPaperslistByContact = ({

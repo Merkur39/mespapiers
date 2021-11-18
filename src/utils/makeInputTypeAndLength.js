@@ -4,7 +4,9 @@ const TEXT = 'Text'
 
 /**
  * Make type and length properties
+ *
  * @param {string} typeDefinition - Definition of type & length of the input
+ * @returns {{ inputType: string, inputMaxLength: number }} - Object
  * @example
  * // For make input number with contraint length to 12
  * makeInputTypeAndLength("Number:12")

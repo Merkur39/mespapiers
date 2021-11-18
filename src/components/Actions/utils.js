@@ -1,5 +1,5 @@
 // TODO Move to cozy-client (files model)
-
+import CozyClient from 'cozy-client'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
 import { isReferencedBy } from 'cozy-client'
@@ -23,9 +23,10 @@ const downloadFileError = error => {
 
 /**
  * forwardFile - Triggers the download of one or multiple files by the browser
- * @param {CozyClient} client
- * @param {array} files One or more files to download
- * @param {func} t i18n function
+ *
+ * @param {CozyClient} client - CozyClient instance
+ * @param {Array} files One or more files to download
+ * @param {Function} t i18n function
  */
 export const forwardFile = async (client, files, t) => {
   try {
@@ -46,8 +47,8 @@ export const forwardFile = async (client, files, t) => {
 /**
  * downloadFiles - Triggers the download of one or multiple files by the browser
  *
- * @param {CozyClient} client
- * @param {array} files One or more files to download
+ * @param {CozyClient} client - CozyClient instance
+ * @param {Array} files One or more files to download
  */
 export const downloadFiles = async (client, files) => {
   const fileCollection = client.collection(FILES_DOCTYPE)
@@ -88,8 +89,8 @@ const isAlreadyInTrash = err => {
 /**
  * trashFiles - Moves a set of files to the cozy trash
  *
- * @param {CozyClient} client
- * @param {array} files  One or more files to trash
+ * @param {CozyClient} client - CozyClient instance
+ * @param {Array} files  One or more files to trash
  */
 export const trashFiles = async (client, files) => {
   try {
@@ -108,8 +109,8 @@ export const trashFiles = async (client, files) => {
 /**
  * removeQualification - Remove qualification attribute
  *
- * @param {CozyClient} client
- * @param {array} files  One or more files
+ * @param {CozyClient} client - CozyClient instance
+ * @param {Array} files  One or more files
  */
 export const removeQualification = async (client, files) => {
   try {

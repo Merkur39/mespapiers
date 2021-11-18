@@ -1,10 +1,10 @@
 import CozyClient from 'cozy-client'
+
 import manifest from '../../manifest.webapp'
 import schema from 'src/doctypes'
 
 /**
- * Returns cozy client instance
- * @returns {object} cozy client instance
+ * @returns {CozyClient} - CozyClient instance
  */
 export const getClient = () => {
   const root = document.querySelector('[role=application]')
