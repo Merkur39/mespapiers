@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react'
+import React, { useState, useMemo, useRef, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -60,6 +60,23 @@ const PaperLine = ({ paper, divider, actions }) => {
     name: paper.name,
     type: 'file'
   })
+
+  // REVIEW START
+  // Repeat navigation Homepage <-> Paper list with delay < 30s & same with delay > 30s & check Network tab
+  useEffect(() => {
+    ;(async () => {
+      let response
+      if (paper.class === 'image') {
+        response = await client.fetch('GET', paper.links.small)
+      } else if (paper.class === 'pdf') {
+        response = await client.fetch('GET', paper.links.icon)
+      }
+      console.log('Response : ', response)
+    })()
+
+    return () => {}
+  }, [client, paper.class, paper.links.icon, paper.links.small])
+  // REVIEW END
 
   return (
     <>
